@@ -46,7 +46,10 @@ run
 ```
 You will see the website up and running. Please select a location where you want to search for jobs, it can be a city, a state, a contry, or all (city, State, Country) if you want to be specific. Next upload your resume in a PDF format and make sure you have a 'Skills' section.
 
-For a static deployed version with lots of limitations a version is deployed at [pythonanywhere] (http://4sightjobfinder.pythonanywhere.com/), but for the dynamic working version please follow the previous steps to run locally. 
+For a static deployed version with lots of limitations a version is deployed at [pythonanywhere], but for the dynamic working version please follow the previous steps to run locally.
+
+[pythonanywhere](http://4sightjobfinder.pythonanywhere.com/)
+
 ## Acknowledgements
 
  - This is a senior project for [Hillcrest Highschool](https://www.hillcrestknights.com/)
