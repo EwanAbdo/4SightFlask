@@ -20,7 +20,7 @@ This is my senior graduation project for Hillcrest Highschool. This project is t
 [mgithub]: https://github.com/Jimmy-INL
 ## Run Locally
 
-Clone the project
+From your terminal Clone the project
 
 ```bash
   git clone https://github.com/EwanAbdo/4SightFlask.git
