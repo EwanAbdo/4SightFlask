@@ -1,0 +1,141 @@
+<head>
+  <!-- Other head content -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Web4SightStyles.css') }}">
+</head>
+
+<!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#counter">Counter</a></li>
+      <li><a href="#footer">Footer</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Welcome to 4Sight</h1>
+    <p>We help you find the best career path and build skills for your dream job</p>
+    <div id="particles-js"></div>
+    <script src="../static/js/particles.js"></script>
+    <script src="../static/js/app.js"></script>
+  </div>
+
+  <!-- Slider -->
+  <div class="slider">
+    <div class="slide">
+      <img src="../static/images/sky.png" alt="image1">
+      <p>You can explore space</p>
+    </div>
+    <div class="slide">
+      <img src="../static/images/EwanCyborg.png" height="20%" alt="image2" >
+      <p>Build robots and metahumans</p>
+    </div>
+    <div class="slide">
+      <img src="../static/images/surgeon2.png" alt="image3">
+      <p>Or save lives</p>
+    </div>
+  </div>
+
+<!-- Services -->
+<div id="services">
+  <h2>Our Services</h2>
+  <div class="service">
+    <h3>Job Search</h3>
+    <p>Upload your resume to let us search LinkedIn for you dream jobs. (only PDF)</p>
+    <!-- Form for uploading transcripts and resume -->
+    <form id="job-search-form" action="/run_script" method="POST" enctype="multipart/form-data">
+
+      <center>
+        <label>Location</label>
+        <input type="text" value="" name="city" action='/get_city' required>
+      </center>
+
+      <center><input type="file" name="resume" accept=".pdf" required></center>
+
+      <center><input type="submit" value="Search Jobs"></center>
+    </form>
+  </div>
+  <div class="service">
+    <h3>Results</h3>
+    <p>Below are jobs found in the given location.</p>
+    <!-- Form for displaying CSV data as HTML table -->
+    <form id="read-csv-form" action="/show_data" method="POST" enctype="multipart/form-data">
+      <input type="file" id="fileUpload" />
+      <input type="button" id="upload" value="Upload" onclick="Upload()" />
+      <hr />
+      <div id="dvCSV" style="overflow-y: auto; max-height: 500px;">
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function Upload() {
+    var fileUpload = document.getElementById("fileUpload");
+    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+    if (regex.test(fileUpload.value.toLowerCase())) {
+      if (typeof (FileReader) != "undefined") {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var table = document.createElement("table");
+          table.style.width = "100%";
+          table.style.borderCollapse = "collapse";
+          table.style.wordWrap = "break-word";
+          table.style.tableLayout = "fixed";
+          var rows = e.target.result.split("\n");
+          for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].split(",");
+            if (cells.length > 1) {
+              var row = table.insertRow(-1);
+              var title = cells[0];
+              var company = cells[1];
+              var location = cells.slice(2, cells.length - 1).join(',');
+              if (location.startsWith('"') && location.endsWith('"')) {
+                location = location.substring(1, location.length - 1);
+              }
+              var apply = cells[cells.length - 1];
+              if (apply.startsWith('http')) {
+                apply = '<a href="' + apply + '" target="_blank">link</a>';
+              }
+              var titleCell = row.insertCell(-1);
+              titleCell.innerHTML = title;
+              titleCell.style.border = "1px solid black";
+              var companyCell = row.insertCell(-1);
+              companyCell.innerHTML = company;
+              companyCell.style.border = "1px solid black";
+              var locationCell = row.insertCell(-1);
+              locationCell.innerHTML = location;
+              locationCell.style.border = "1px solid black";
+              var applyCell = row.insertCell(-1);
+              applyCell.innerHTML = apply;
+              applyCell.style.border = "1px solid black";
+            }
+          }
+          var dvCSV = document.getElementById("dvCSV");
+          dvCSV.innerHTML = "";
+          dvCSV.appendChild(table);
+        }
+        reader.readAsText(fileUpload.files[0]);
+      } else {
+        alert("This browser does not support HTML5.");
+      }
+    } else {
+      alert("Please upload a valid CSV file.");
+    }
+  }
+</script>
+
+  <!-- Counter -->
+  <div id="counter">
+      <h2>Success Stories</h2>
+      <p>We've helped <span id="success-count">X</span> people find their dream jobs!</p>
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <p>Copyright 2023 4Sight-by Ewan Abdo</p>
+  </footer>
+
+
