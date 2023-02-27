@@ -48,7 +48,7 @@ You will see the website up and running. Please select a location where you want
 
 For a static deployed version with lots of limitations a version is deployed at [pythonanywhere], but for the dynamic working version please follow the previous steps to run locally.
 
-[pythonanywhere](http://4sightjobfinder.pythonanywhere.com/)
+[pythonanywhere]:(http://4sightjobfinder.pythonanywhere.com/)
 
 ## Acknowledgements
 
